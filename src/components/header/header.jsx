@@ -27,7 +27,7 @@ export default function Header() {
                     </div>
                     <div className="menu-item">
                         <span>Pages</span>
-                        <img src={arrow} alt="" className="arrow-inactive" />
+                        <img src={arrow} alt="arrow" className="arrow-inactive" />
                         <img src={arrowPink} alt="arrow-pink" className="arrow-active" />
                     </div>
                     <div className="menu-item active">
