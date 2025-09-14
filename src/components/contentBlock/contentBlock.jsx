@@ -1,6 +1,6 @@
 import './contentBlock.css';
 
-import bigDotsField from '../assets/bigDotsField.svg';
+import bigDotsField from '../../assets/big-dots-field.svg';
 
 export default function ContentBlock() {
     return (

@@ -5,7 +5,7 @@ export default function OrderWrapper() {
                 <div className="product">
                     <div className="photo"></div>
                     <div className="product-info">
-                        <div className="title">Fashionee - catton shirt (S)</div>
+                        <div className="title">Fashionee - cotton shirt (S)</div>
                         <div className="price-wrapper">
                             <div className="price-and-quantity">
                                 <div className="price">

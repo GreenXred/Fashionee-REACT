@@ -1,12 +1,12 @@
 import "./header.css";
 
-import logo from '../assets/logo.svg';
-import arrow from '../assets/arrow.svg';
-import arrowPink from '../assets/arrow-pink.svg';
-import search from '../assets/search.svg';
-import profile from '../assets/profile.svg';
-import favorites from '../assets/favorites.svg';
-import cart from '../assets/cart.svg';
+import logo from '../../assets/logo.svg';
+import arrow from '../../assets/arrow.svg';
+import arrowPink from '../../assets/arrow-pink.svg';
+import search from '../../assets/search.svg';
+import profile from '../../assets/profile.svg';
+import favorites from '../../assets/favorites.svg';
+import cart from '../../assets/cart.svg';
 
 export default function Header() {
     return (
