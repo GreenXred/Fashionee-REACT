@@ -41,6 +41,7 @@
     flex-direction: row;
     gap: 12px;
     padding-left: 358px;
+    z-index: 10;
 }
 
 .nav .page-description .description .mini-nav .mini-nav-item {

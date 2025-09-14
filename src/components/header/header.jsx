@@ -52,11 +52,11 @@ export default function Header() {
                 </div>
                 <div className="header-icon">
                     <img src={favorites} alt="favorites" />
-                    <div className="counter">1</div>
+                    <div className="counter">0</div>
                 </div>
                 <div className="header-icon">
                     <img src={cart} alt="cart" />
-                    <div className="counter">2</div>
+                    <div className="counter">0</div>
                 </div>
             </div>
         </header >

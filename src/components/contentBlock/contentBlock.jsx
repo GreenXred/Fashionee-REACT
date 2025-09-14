@@ -2,22 +2,28 @@ import './contentBlock.css';
 
 import bigDotsField from '../../assets/big-dots-field.svg';
 
-export default function ContentBlock() {
+export default function ContentBlock({ page, onGoShop, onGoCart }) {
+    const isShop = page === 'shop';
+
     return (
         <nav className="nav">
             <div className="container">
                 <div className="page-description">
                     <div className="description">
                         <div className="description-title">
-                            <span>Shop</span>
+                            <span>{isShop ? 'Shop' : 'Cart'}</span>
                         </div>
                         <div className="mini-nav">
                             <div className="vertical-line"></div>
-                            <div className="mini-nav-item">
-                                <span>Home</span>
-                            </div>
-                            <div className="mini-nav-item active">
+                            <div className={'mini-nav-item' + (isShop ? ' active' : '')}
+                                onClick={onGoShop}
+                            >
                                 <span>Shop</span>
+                            </div>
+                            <div className={'mini-nav-item' + (isShop ? '' : ' active')}
+                                onClick={onGoCart}
+                            >
+                                <span>Cart</span>
                             </div>
                         </div>
                         <div className="border-line"></div>

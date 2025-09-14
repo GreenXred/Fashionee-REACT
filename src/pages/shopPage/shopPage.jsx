@@ -31,7 +31,7 @@ const PRODUCTS = [
     { id: 9, name: 'Blouse with insert and ruffles', priceCurrent: 30.99, priceOld: null, sale: false, isNew: true },
 ];
 
-export default function ShopPage() {
+export default function ShopPage({ goCart }) {
     // Пока заглушки — стили и верстка уже совпадут
     const totalCount = 67;
     const sort = 'RELEVANCE';
@@ -46,7 +46,7 @@ export default function ShopPage() {
         <>
             {/* Верхняя шапка и блок с заголовком страницы */}
             <Header />
-            <ContentBlock title="Shop" breadcrumbs={['Home', 'Shop']} />
+            <ContentBlock page="shop" onGoShop={() => {}} onGoCart={goCart}/>
 
             {/* Каркас страницы как в исходной вёрстке */}
             <div className="container">

@@ -8,11 +8,11 @@ import ContentBlock from '../../components/contentBlock/contentBlock.jsx';
 import OrderWrapper from '../../components/cart/orderWrapper/orderWrapper.jsx';
 import Promo from '../../components/cart/promoCodeWrapper/promo.jsx';
 
-export default function CartPage() {
+export default function CartPage({ goShop }) {
   return (
     <>
       <Header />
-      <ContentBlock />
+      <ContentBlock page="cart" onGoShop={goShop} onGoCart={() => {}} />
       
       <div className="container">
         <div className="cart">
