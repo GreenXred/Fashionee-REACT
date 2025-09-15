@@ -4,7 +4,7 @@ const FavoritesContext = createContext(null);
 const LS_KEY = 'favorites';
 
 export function FavoritesProvider({ children }) {
-    // читаем из localStorage один раз при старте
+    // загружаем из localStorage один раз при старте
     const [ids, setIds] = useState(function () {
         try {
             const raw = localStorage.getItem(LS_KEY);
@@ -15,7 +15,7 @@ export function FavoritesProvider({ children }) {
         }
     });
 
-    // пишем в localStorage при каждом изменении
+    // запись в localStorage при каждом изменении
     useEffect(() => {
         localStorage.setItem(LS_KEY, JSON.stringify(Array.from(ids)));
     }, [ids]);
