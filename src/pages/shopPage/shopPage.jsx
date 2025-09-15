@@ -1,4 +1,5 @@
 import './shop.css';
+import data from '../../../products.json';
 
 // Верх страницы
 import Header from '../../components/header/header.jsx';
@@ -18,22 +19,11 @@ import SortAndCount from '../../components/showCase/productsArea/sortAndCount/so
 import ProductCard from '../../components/showCase/productsArea/productCard/productCard.jsx';
 import Pagination from '../../components/showCase/productsArea/pagination/pagination.jsx';
 
-// Моки для сетки (замени реальными данными при подключении API/JSON)
-const PRODUCTS = [
-    { id: 1, name: 'Textured turtleneck with zip', priceCurrent: 53.99, priceOld: 59.99, sale: true, isNew: false },
-    { id: 2, name: 'Spray wrap skirt', priceCurrent: 35.99, priceOld: null, sale: false, isNew: false },
-    { id: 3, name: 'Short shorts with straps', priceCurrent: 20.99, priceOld: null, sale: false, isNew: false },
-    { id: 4, name: 'Warm casual sweater', priceCurrent: 80.99, priceOld: null, sale: false, isNew: true },
-    { id: 5, name: 'Retro style handbag', priceCurrent: 45.99, priceOld: 59.99, sale: true, isNew: false },
-    { id: 6, name: 'Long oversized T-shirt', priceCurrent: 30.99, priceOld: 59.99, sale: true, isNew: false },
-    { id: 7, name: 'Shoulder bag', priceCurrent: 60.99, priceOld: null, sale: false, isNew: true },
-    { id: 8, name: 'Stylish and comfortable cap', priceCurrent: 40.99, priceOld: null, sale: false, isNew: false },
-    { id: 9, name: 'Blouse with insert and ruffles', priceCurrent: 30.99, priceOld: null, sale: false, isNew: true },
-];
+const PRODUCTS = data.products; // данные из массива товаров
 
 export default function ShopPage({ goCart }) {
     // Пока заглушки — стили и верстка уже совпадут
-    const totalCount = 67;
+    const totalCount = PRODUCTS.length;
     const sort = 'RELEVANCE';
 
     function handleChangeSort(value) {
@@ -48,11 +38,10 @@ export default function ShopPage({ goCart }) {
             <Header />
             <ContentBlock page="shop" onGoShop={() => {}} onGoCart={goCart}/>
 
-            {/* Каркас страницы как в исходной вёрстке */}
+            {/* Каркас страницы */}
             <div className="container">
                 <div className="shop">
-                    {/* Левая колонка — важный момент: НЕ дублируем заголовки/обёртки,
-              т.к. они уже внутри самих компонентов сайдбара */}
+                    {/* Левая колонка */}
                     <aside className="sidebar">
                         <SearchBar />
                         <CategoryFilter />
@@ -78,9 +67,9 @@ export default function ShopPage({ goCart }) {
                                         key={p.id}
                                         id={p.id}
                                         name={p.name}
-                                        priceCurrent={p.priceCurrent}
-                                        priceOld={p.priceOld}
-                                        sale={p.sale}
+                                        priceCurrent={p.price}
+                                        priceOld={p.oldPrice}
+                                        sale={p.isSale}
                                         isNew={p.isNew}
                                     />
                                 );
