@@ -76,6 +76,7 @@ export default function ShopPage({ goCart }) {
                                 return (
                                     <ProductCard
                                         key={p.id}
+                                        id={p.id}
                                         name={p.name}
                                         priceCurrent={p.priceCurrent}
                                         priceOld={p.priceOld}

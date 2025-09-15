@@ -41,6 +41,7 @@
     padding-bottom: 15px;
     text-align: left;
 }
+
 .shop .sidebar .sidebar-item .sidebar-content .custom-list {
     margin: 0 0 0 20px;
 }
@@ -66,7 +67,7 @@
 }
 
 .shop .sidebar .sidebar-item .sidebar-content .colors .color .color-checkbox+.color-name {
-    display: inline-flex; 
+    display: inline-flex;
     align-items: center;
     user-select: none;
     font-size: 14px;
@@ -77,13 +78,13 @@
 .shop .sidebar .sidebar-item .sidebar-content .colors .color .color-checkbox+.color-name::before {
     content: "";
     display: inline-block;
-    width: 15px; 
-    height: 15px; 
-    flex-shrink: 0; 
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
     flex-grow: 0;
-    border: 1px solid rgba(238, 238, 238, 1); 
-    margin-right: 15px; 
-    background-repeat: no-repeat; 
+    border: 1px solid rgba(238, 238, 238, 1);
+    margin-right: 15px;
+    background-repeat: no-repeat;
     background-position: center center;
     box-sizing: border-box;
 }
@@ -141,6 +142,34 @@
     line-height: 12px;
 }
 
+/* Центр кнопки Buy и панели количества в карточке */
+.shop .products-wrapper .product .buy-button,
+.shop .products-wrapper .product .buy-panel {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+    height: 35px;
+}
+
+.shop .products-wrapper .product .buy-panel .qty-btn {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #000;
+    background: transparent;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.shop .products-wrapper .product .buy-panel .qty {
+    min-width: 20px;
+    text-align: center;
+    font-weight: 600;
+    margin: 0 10px;
+}
+
 .shop .products-wrapper {
     max-width: 846px;
     width: 100%;
@@ -158,7 +187,7 @@
     line-height: 27px;
 }
 
-.shop .products-wrapper .sort-and-count .bold{
+.shop .products-wrapper .sort-and-count .bold {
     font-size: 16px;
     font-weight: 600;
     line-height: 27px;
@@ -268,4 +297,16 @@
     width: 22px;
     text-align: center;
     width: 22px;
+}
+
+.shop .products-wrapper .product .top-bar .favorits {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Красный оттенок для активного избранного */
+.shop .products-wrapper .product .top-bar .favorits.active img {
+    filter: brightness(0) saturate(100%) invert(21%) sepia(93%) saturate(4775%) hue-rotate(339deg) brightness(99%) contrast(95%);
 }

@@ -1,4 +1,6 @@
 import "./header.css";
+import { useFavorites } from '../../state/favoritesContext.jsx';
+import { useCart } from '../../state/cartContext.jsx';
 
 import logo from '../../assets/logo.svg';
 import arrow from '../../assets/arrow.svg';
@@ -9,6 +11,9 @@ import favorites from '../../assets/favorites.svg';
 import cart from '../../assets/cart.svg';
 
 export default function Header() {
+    const { count } = useFavorites();
+    const { totalCount } = useCart();
+
     return (
         <header className="header">
             <div className="left-side">
@@ -52,11 +57,11 @@ export default function Header() {
                 </div>
                 <div className="header-icon">
                     <img src={favorites} alt="favorites" />
-                    <div className="counter">0</div>
+                    <div className="counter">{count}</div>
                 </div>
                 <div className="header-icon">
                     <img src={cart} alt="cart" />
-                    <div className="counter">0</div>
+                    <div className="counter">{totalCount}</div>
                 </div>
             </div>
         </header >
