@@ -1,5 +1,3 @@
-import './showCase.css';
-
 // sidebar
 import SearchBar from './sidebar/searchBar/searchBar.jsx';
 import CategoryFilter from './sidebar/categoryFilter/categoryFilter.jsx';
@@ -10,9 +8,9 @@ import Reviewed from './sidebar/reviewed/reviewed.jsx';
 import SaleBanner from './sidebar/saleBanner/saleBanner.jsx';
 
 // products-area
-import SortAndCount from './products-area/sortAndCount/sortAndCount.jsx';
-import ProductCard from './products-area/productCard/productCard.jsx';
-import Pagination from './products-area/pagination/pagination.jsx';
+import SortAndCount from './productsArea/sortAndCount/sortAndCount.jsx';
+import ProductCard from './productsArea/productCard/productCard.jsx';
+import Pagination from './productsArea/pagination/pagination.jsx';
 
 export default function ShowCase({
     products = [], // массив товаров
