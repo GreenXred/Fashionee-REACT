@@ -78,13 +78,24 @@
 }
 
 .footer .footer-info .column.column-4 .newsletter-form .input {
-    padding-right: 30px;
+    padding: 0 48px 0 0;
 }
 
 
-.footer .footer-info .column.column-4 .newsletter-form .send-icon {
+.footer .footer-info .column.column-4 .newsletter-form .send {
     position: absolute;
-    right: 0;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.footer .footer-info .column.column-4 .newsletter-form .send img {
+    width: 24px;
+    height: 24px;
+    display: block;
 }
 
 .footer .footer-info .column .logo {

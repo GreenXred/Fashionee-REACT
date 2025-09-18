@@ -1,11 +1,11 @@
 import "./footer.css"
 
-import logo from '../../assets/icons/logo.svg';
-import send from '../../assets/icons/send.svg';
-import visa from '../../assets/icons/visa.svg';
-import mastercard from '../../assets/icons/mastercard.svg';
-import paypal from '../../assets/icons/paypal.svg';
-import payoneer from '../../assets/icons/payoneer.svg';
+import logo from '../../assets/logo.svg';
+import send from '../../assets/send.svg';
+import visa from '../../assets/visa.svg';
+import mastercard from '../../assets/mastercard.svg';
+import paypal from '../../assets/paypal.svg';
+import payoneer from '../../assets/payoneer.svg';
 import bigDots from '../../assets/big-dots-field.svg';
 import smallDots from '../../assets/small-dots-field.svg';
 
@@ -16,7 +16,7 @@ export default function Footer() {
                 <div className="footer-info">
                     <div className="column column-1">
                         <div className="logo">
-                            <img src="./icons/logo.svg" alt="logo" />
+                            <img src={logo} alt="logo" />
                         </div>
                         <div className="about-brand">
                             Cillum eu id enim aliquip aute ullamco anim. Culpa deserunt nostrud excepteur voluptate.
@@ -75,7 +75,7 @@ export default function Footer() {
                                 placeholder="Your e-mail"
                             />
                             <label className="send" htmlFor="newsletter-email" aria-label="Submit email">
-                                <img src="/icons/send.svg" alt="" />
+                                <img src={send} alt="" />
                             </label>
                         </div>
                     </div>
@@ -103,10 +103,10 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="big-dots-background">
-                    <img src={big - dots - field} alt="" />
+                    <img src={bigDots} alt="" />
                 </div>
                 <div className="small-dots-background">
-                    <img src={small - dots - field} alt="" />
+                    <img src={smallDots} alt="" />
                 </div>
             </div>
         </footer>

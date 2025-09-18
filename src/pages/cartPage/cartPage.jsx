@@ -8,6 +8,8 @@ import ContentBlock from '../../components/contentBlock/contentBlock.jsx';
 import OrderWrapper from '../../components/cart/orderWrapper/orderWrapper.jsx';
 import Promo from '../../components/cart/promoCodeWrapper/promo.jsx';
 
+import Footer from '../../components/footer/footer.jsx';
+
 export default function CartPage({ goShop }) {
   return (
     <>
@@ -20,6 +22,7 @@ export default function CartPage({ goShop }) {
           <Promo />
         </div>
       </div>
+      <Footer />
     </>
   );
 }

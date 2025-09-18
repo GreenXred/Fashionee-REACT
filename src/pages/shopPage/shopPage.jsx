@@ -5,6 +5,7 @@ import data from '../../../products.json';
 import Header from '../../components/header/header.jsx';
 import ContentBlock from '../../components/contentBlock/contentBlock.jsx';
 import ShowCase from '../../components/showCase/showCase.jsx';
+import Footer from '../../components/footer/footer.jsx';
 
 const PRODUCTS = data.products;
 
@@ -24,6 +25,7 @@ export default function ShopPage({ goCart }) {
           onPageChange={setPage}
         />
       </div>
+      <Footer />
     </>
   );
 }
