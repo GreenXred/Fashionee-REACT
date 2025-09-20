@@ -12,6 +12,9 @@ import SortAndCount from './productsArea/sortAndCount/sortAndCount.jsx';
 import ProductCard from './productsArea/productCard/productCard.jsx';
 import Pagination from './productsArea/pagination/pagination.jsx';
 
+import { useMemo, useState } from 'react';
+
+
 export default function ShowCase({
     products = [], // массив товаров
     page = 1,      // текущая страница
@@ -21,14 +24,30 @@ export default function ShowCase({
     sort = 'RELEVANCE',
     onChangeSort = () => { },
 }) {
-    const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
+
+    const [query, setQuery] = useState('');
+
+    // фильтрация по названию 
+    const filtered = useMemo(() => {
+        const q = query.trim().toLowerCase();
+        if (!q) return products;
+        return products.filter((p) => (p.name || '').toLowerCase().includes(q));
+    }, [products, query]);
+
+    const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
     const start = (page - 1) * pageSize;
-    const visible = products.slice(start, start + pageSize);
+    const visible = filtered.slice(start, start + pageSize);
 
     return (
         <div className="shop">
             <aside className="sidebar">
-                <SearchBar />
+                <SearchBar
+                    defaultValue=""
+                    onChange={(q) => {
+                        setQuery(q);
+                        onPageChange?.(1); // при новом поиске — на первую страницу
+                    }}
+                />
                 <CategoryFilter />
                 <PriceBar />
                 <ColorFilter />
@@ -38,7 +57,7 @@ export default function ShowCase({
             </aside>
 
             <section className="products-wrapper">
-                <SortAndCount totalCount={totalCount} sort={sort} onChangeSort={onChangeSort} />
+                <SortAndCount totalCount={filtered.length} sort={sort} onChangeSort={onChangeSort} />
 
                 <div className="products">
                     {visible.map((p) => (
