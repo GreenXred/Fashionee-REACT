@@ -25,14 +25,25 @@ export default function ShowCase({
     onChangeSort = () => { },
 }) {
 
+    // поиск
     const [query, setQuery] = useState('');
 
-    // фильтрация по названию 
-    const filtered = useMemo(() => {
+    // категории: выбрана пользователем / применена
+    const [pendingCategory, setPendingCategory] = useState('All');
+    const [activeCategory, setActiveCategory] = useState('All');
+
+    // 1) фильтрация по поиску 
+    const searched = useMemo(() => {
         const q = query.trim().toLowerCase();
         if (!q) return products;
         return products.filter((p) => (p.name || '').toLowerCase().includes(q));
     }, [products, query]);
+
+    // 2) фильтрация по примененной категории (activeCategory)
+    const filtered = useMemo(() => {
+        if (!activeCategory || activeCategory === 'All') return searched;
+        return searched.filter(p => (p.categories || []).includes(activeCategory));
+    }, [searched, activeCategory]);
 
     const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
     const start = (page - 1) * pageSize;
@@ -48,10 +59,15 @@ export default function ShowCase({
                         onPageChange?.(1); // при новом поиске — на первую страницу
                     }}
                 />
-                <CategoryFilter />
+                <CategoryFilter // просто показать выбор
+                    value={pendingCategory}
+                    onChange={setPendingCategory}
+                />
                 <PriceBar />
                 <ColorFilter />
-                <ApplyButton />
+                <ApplyButton // применить фильтр: переносим pending -> active
+                    onApply={() => { setActiveCategory(pendingCategory); onPageChange?.(1); }}
+                />
                 <Reviewed />
                 <SaleBanner />
             </aside>
