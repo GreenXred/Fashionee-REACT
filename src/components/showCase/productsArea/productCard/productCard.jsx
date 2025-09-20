@@ -3,7 +3,7 @@ import { useFavorites } from '../../../../state/favoritesContext.jsx';
 import { useCart } from '../../../../state/cartContext.jsx';
 
 
-export default function ProductCard({ id, name, priceCurrent, priceOld, sale, isNew }) {
+export default function ProductCard({ id, name, priceCurrent, priceOld, sale, isNew, image }) {
   const fav = useFavorites();
   const isFav = fav.isFavorite(id);
   const cart = useCart();
@@ -12,6 +12,7 @@ export default function ProductCard({ id, name, priceCurrent, priceOld, sale, is
   return (
     <div className="product">
       <div className="photo">
+        {image ? <img className="photo-img" src={image} alt={name} /> : null}
         <div className="top-bar">
           <div className="labels">
             {sale && <div className="label sale">Sale</div>}
@@ -31,8 +32,8 @@ export default function ProductCard({ id, name, priceCurrent, priceOld, sale, is
       <div className="info">
         <div className="name">{name}</div>
         <div className="price">
-          <div className="current-price">{priceCurrent}</div>
-          {priceOld && <div className="old-price">{priceOld}</div>}
+          <div className="current-price">${priceCurrent}</div>
+          {priceOld != null && <div className="old-price">${priceOld}</div>}
         </div>
       </div>
       {qty === 0 ? (

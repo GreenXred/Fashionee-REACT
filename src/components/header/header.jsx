@@ -10,7 +10,7 @@ import profile from '../../assets/profile.svg';
 import favorites from '../../assets/favorites.svg';
 import cart from '../../assets/cart.svg';
 
-export default function Header() {
+export default function Header({ onGoCart }) {
     const { count } = useFavorites();
     const { totalCount } = useCart();
 
@@ -59,7 +59,11 @@ export default function Header() {
                     <img src={favorites} alt="favorites" />
                     <div className="counter">{count}</div>
                 </div>
-                <div className="header-icon">
+                <div className="header-icon"
+                    role="button"
+                    onClick={() => onGoCart?.()}
+                    aria-label="Open cart"
+                >
                     <img src={cart} alt="cart" />
                     <div className="counter">{totalCount}</div>
                 </div>

@@ -14,7 +14,7 @@ export default function ShopPage({ goCart }) {
 
   return (
     <>
-      <Header />
+      <Header onGoCart={goCart}/>
       <ContentBlock page="shop" onGoShop={() => {}} onGoCart={goCart} />
 
       <div className="container">

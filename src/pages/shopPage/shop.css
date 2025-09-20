@@ -142,7 +142,18 @@
     line-height: 12px;
 }
 
-/* Центр кнопки Buy и панели количества в карточке */
+.shop .products-wrapper .product .photo {
+    position: relative;
+}
+
+.shop .products-wrapper .product .photo img.photo-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 .shop .products-wrapper .product .buy-button,
 .shop .products-wrapper .product .buy-panel {
     width: 100%;
