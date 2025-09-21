@@ -32,6 +32,14 @@ export default function ShowCase({
     const [pendingCategory, setPendingCategory] = useState('All');
     const [activeCategory, setActiveCategory] = useState('All');
 
+    // цена: выбрана / применена
+    const [pendingPrice, setPendingPrice] = useState({ min: '', max: '' });
+    const [activePrice, setActivePrice] = useState({ min: '', max: '' });
+
+    // цвета: выбраны / применены (мультивыбор)
+    const [pendingColors, setPendingColors] = useState([]); // ['red','blue',...]
+    const [activeColors, setActiveColors] = useState([]);
+
     // 1) фильтрация по поиску 
     const searched = useMemo(() => {
         const q = query.trim().toLowerCase();
@@ -40,10 +48,32 @@ export default function ShowCase({
     }, [products, query]);
 
     // 2) фильтрация по примененной категории (activeCategory)
-    const filtered = useMemo(() => {
+    const byCategory = useMemo(() => {
         if (!activeCategory || activeCategory === 'All') return searched;
         return searched.filter(p => (p.categories || []).includes(activeCategory));
     }, [searched, activeCategory]);
+
+    // 3) фильтрация по применённой цене
+    const byPrice = useMemo(() => {
+        const min = Number(activePrice.min);
+        const max = Number(activePrice.max);
+        return byCategory.filter((p) => {
+            const price = Number(p.price);
+            if (!Number.isNaN(min) && activePrice.min !== '' && price < min) return false;
+            if (!Number.isNaN(max) && activePrice.max !== '' && price > max) return false;
+            return true;
+        });
+    }, [byCategory, activePrice]);
+
+    // 4) цвета (применённые)
+    const filtered = useMemo(() => {
+        if (!activeColors.length) return byPrice;
+        return byPrice.filter((p) => {
+            const raw = p.colors ?? p.color ?? [];
+            const colors = (Array.isArray(raw) ? raw : [raw]).map(c => String(c).toLowerCase());
+            return activeColors.some(c => colors.includes(c));
+        });
+    }, [byPrice, activeColors]);
 
     const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
     const start = (page - 1) * pageSize;
@@ -63,10 +93,22 @@ export default function ShowCase({
                     value={pendingCategory}
                     onChange={setPendingCategory}
                 />
-                <PriceBar />
-                <ColorFilter />
+                <PriceBar // просто отобразить введенную цену
+                    min={pendingPrice.min}
+                    max={pendingPrice.max}
+                    onChange={setPendingPrice}
+                />
+                <ColorFilter // просто отобразить выбранные цвета
+                    value={pendingColors} 
+                    onChange={setPendingColors}
+                />
                 <ApplyButton // применить фильтр: переносим pending -> active
-                    onApply={() => { setActiveCategory(pendingCategory); onPageChange?.(1); }}
+                    onApply={() => {
+                        setActiveCategory(pendingCategory); // применяем категорию
+                        setActivePrice(pendingPrice);   //  применяем цену
+                        setActiveColors(pendingColors); // применяем цвета
+                        onPageChange?.(1); // при применении фильтра — на первую страницу
+                    }}
                 />
                 <Reviewed />
                 <SaleBanner />
