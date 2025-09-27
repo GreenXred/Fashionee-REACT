@@ -8,7 +8,7 @@ export default function PriceBar({ min, max, onChange, minLimit, maxLimit }) {
       <div className="sidebar-content">
         <div className="price-bar">
           <input
-            type="number"
+            type="text"
             className="input"
             value={min ?? ''}
             onChange={onMin}
@@ -17,7 +17,7 @@ export default function PriceBar({ min, max, onChange, minLimit, maxLimit }) {
             placeholder={minLimit != null ? String(minLimit) : ''}
           />
           <input
-            type="number"
+            type="text"
             className="input"
             value={max ?? ''}
             onChange={onMax}
@@ -25,9 +25,6 @@ export default function PriceBar({ min, max, onChange, minLimit, maxLimit }) {
             step="0.01"
             placeholder={maxLimit != null ? String(maxLimit) : ''}
           />
-          {minLimit != null && maxLimit != null && (
-            <div className="hint">Range: {minLimit} — {maxLimit}</div>
-          )}
         </div>
       </div>
     </div>

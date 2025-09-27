@@ -40,6 +40,38 @@ export default function ShowCase({
     const [pendingColors, setPendingColors] = useState([]); // ['red','blue',...]
     const [activeColors, setActiveColors] = useState([]);
 
+    // ----- Брать данные динамически - json -----
+
+    // категории из json
+    const allCategories = useMemo(() => {
+        const set = new Set();
+        products.forEach((p) => (p.categories || []).forEach((cat) => cat && set.add(String(cat))));
+        return ['All', ...Array.from(set)];
+    }, [products]);
+
+    // цвета из json 
+    const allColors = useMemo(() => {
+        const set = new Set();
+        products.forEach((p) => {
+            const raw = p.colors ?? p.color ?? [];
+            const arr = Array.isArray(raw) ? raw : [raw];
+            arr.forEach((color) => {
+                const c = String(color || '').trim();
+                if (c) set.add(c);           
+            });
+        });
+        return Array.from(set);          
+    }, [products]);
+
+    //  мин/макс цен из json
+    const [minPrice, maxPrice] = useMemo(() => {
+        const nums = products.map((p) => Number(p.price)).filter((n) => !Number.isNaN(n));
+        if (nums.length === 0) return [0, 0];
+        return [Math.min(...nums), Math.max(...nums)];
+    }, [products]);
+
+    // ----- Фильтрация -----
+
     // 1) фильтрация по поиску 
     const searched = useMemo(() => {
         const q = query.trim().toLowerCase();
@@ -89,17 +121,21 @@ export default function ShowCase({
                         onPageChange?.(1); // при новом поиске — на первую страницу
                     }}
                 />
-                <CategoryFilter // просто показать выбор
+                <CategoryFilter // фильтрация по категориям динамически
+                    options={allCategories}
                     value={pendingCategory}
                     onChange={setPendingCategory}
                 />
-                <PriceBar // просто отобразить введенную цену
+                <PriceBar // фильтрация по цене динамически
                     min={pendingPrice.min}
                     max={pendingPrice.max}
                     onChange={setPendingPrice}
+                    minLimit={minPrice}
+                    maxLimit={maxPrice}
                 />
-                <ColorFilter // просто отобразить выбранные цвета
-                    value={pendingColors} 
+                <ColorFilter // фильтрация по цветам динамически
+                    options={allColors}
+                    value={pendingColors}
                     onChange={setPendingColors}
                 />
                 <ApplyButton // применить фильтр: переносим pending -> active
