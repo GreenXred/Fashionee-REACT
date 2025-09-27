@@ -1,0 +1,13 @@
+.arrow {
+    cursor: pointer;
+    transition: transform .12s ease;
+    will-change: transform;
+}
+
+.arrow:hover {
+    transform: scale(1.1);
+}
+
+.page {
+    cursor: pointer;
+}
