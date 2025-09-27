@@ -1,18 +1,11 @@
-export default function ColorFilter({
-    value = [],                 // текущие выбранные цвета
-    onChange,                   
-    options = ['Black', 'Blue', 'Red', 'Yellow', 'Green'],
-}) {
+export default function ColorFilter({ value = [], onChange, options = [] }) {
     const selectedColors = value;
-
     const toggle = (clickedColorLabel) => {
         const normalizedColor = String(clickedColorLabel).toLowerCase();
         const isAlreadySelected = selectedColors.includes(normalizedColor);
-
         const updatedColors = isAlreadySelected
             ? selectedColors.filter((existingColor) => existingColor !== normalizedColor)
             : [...selectedColors, normalizedColor];
-
         onChange?.(updatedColors);
     };
 
@@ -24,7 +17,6 @@ export default function ColorFilter({
                     const normalizedColor = colorLabel.toLowerCase();
                     const isChecked = selectedColors.includes(normalizedColor);
                     const id = `color-${normalizedColor}`;
-
                     return (
                         <div className="color" key={normalizedColor}>
                             <input
