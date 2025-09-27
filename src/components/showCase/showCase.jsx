@@ -8,7 +8,8 @@ import Reviewed from './sidebar/reviewed/reviewed.jsx';
 import SaleBanner from './sidebar/saleBanner/saleBanner.jsx';
 
 // products-area
-import SortAndCount from './productsArea/sortAndCount/sortAndCount.jsx';
+import Count from './productsArea/count/count.jsx';
+import Sort from './productsArea/sort/sort.jsx';
 import ProductCard from './productsArea/productCard/productCard.jsx';
 import Pagination from './productsArea/pagination/pagination.jsx';
 
@@ -25,6 +26,8 @@ export default function ShowCase({
     onChangeSort = () => { },
 }) {
 
+    // ----- Храним состояния -----
+
     // поиск
     const [query, setQuery] = useState('');
 
@@ -39,6 +42,9 @@ export default function ShowCase({
     // цвета: выбраны / применены (мультивыбор)
     const [pendingColors, setPendingColors] = useState([]); // ['red','blue',...]
     const [activeColors, setActiveColors] = useState([]);
+
+    // сортировка: RELEVANCE | PRICE_ASC | PRICE_DESC
+    const [sortMode, setSortMode] = useState('RELEVANCE');
 
     // ----- Брать данные динамически - json -----
 
@@ -57,10 +63,10 @@ export default function ShowCase({
             const arr = Array.isArray(raw) ? raw : [raw];
             arr.forEach((color) => {
                 const c = String(color || '').trim();
-                if (c) set.add(c);           
+                if (c) set.add(c);
             });
         });
-        return Array.from(set);          
+        return Array.from(set);
     }, [products]);
 
     //  мин/макс цен из json
@@ -72,20 +78,20 @@ export default function ShowCase({
 
     // ----- Фильтрация -----
 
-    // 1) фильтрация по поиску 
+    // 1) фильтрация по поиску (sideBar)
     const searched = useMemo(() => {
         const q = query.trim().toLowerCase();
         if (!q) return products;
         return products.filter((p) => (p.name || '').toLowerCase().includes(q));
     }, [products, query]);
 
-    // 2) фильтрация по примененной категории (activeCategory)
+    // 2) фильтрация по примененной категории (activeCategory) / (sideBar)
     const byCategory = useMemo(() => {
         if (!activeCategory || activeCategory === 'All') return searched;
         return searched.filter(p => (p.categories || []).includes(activeCategory));
     }, [searched, activeCategory]);
 
-    // 3) фильтрация по применённой цене
+    // 3) фильтрация по применённой цене (sideBar)
     const byPrice = useMemo(() => {
         const min = Number(activePrice.min);
         const max = Number(activePrice.max);
@@ -97,7 +103,7 @@ export default function ShowCase({
         });
     }, [byCategory, activePrice]);
 
-    // 4) цвета (применённые)
+    // 4) фильтрация цветов (применённые) / (sideBar)
     const filtered = useMemo(() => {
         if (!activeColors.length) return byPrice;
         return byPrice.filter((p) => {
@@ -107,9 +113,20 @@ export default function ShowCase({
         });
     }, [byPrice, activeColors]);
 
-    const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+    // 5) сортировка (применяется к уже отфильтрованным товарам) / (productCard)
+    const sorted = useMemo(() => {
+        if (sortMode === 'PRICE_ASC') {
+            return [...filtered].sort((a, b) => Number(a.price) - Number(b.price));
+        }
+        if (sortMode === 'PRICE_DESC') {
+            return [...filtered].sort((a, b) => Number(b.price) - Number(a.price));
+        }
+        return filtered; // RELEVANCE — исходный порядок
+    }, [filtered, sortMode]);
+
+    const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize));
     const start = (page - 1) * pageSize;
-    const visible = filtered.slice(start, start + pageSize);
+    const visible = sorted.slice(start, start + pageSize);
 
     return (
         <div className="shop">
@@ -149,9 +166,14 @@ export default function ShowCase({
                 <Reviewed />
                 <SaleBanner />
             </aside>
-
             <section className="products-wrapper">
-                <SortAndCount totalCount={filtered.length} sort={sort} onChangeSort={onChangeSort} />
+                <div className="sort-and-count">
+                    <Count total={sorted.length} />
+                    <Sort
+                        value={sortMode}
+                        onChange={(mode) => { setSortMode(mode); onPageChange?.(1); }}
+                    />
+                </div>
 
                 <div className="products">
                     {visible.map((p) => (
@@ -167,7 +189,7 @@ export default function ShowCase({
                         />
                     ))}
                 </div>
-
+                
                 <Pagination
                     page={page}
                     totalPages={totalPages}
