@@ -60,9 +60,7 @@ export default function Header({ onGoCart }) {
                     <div className="counter">{count}</div>
                 </div>
                 <div className="header-icon"
-                    role="button"
                     onClick={() => onGoCart?.()}
-                    aria-label="Open cart"
                 >
                     <img src={cart} alt="cart" />
                     <div className="counter">{totalCount}</div>

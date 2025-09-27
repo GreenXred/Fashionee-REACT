@@ -1,21 +1,35 @@
 import rightPagin from '../../../../assets/right-pagin-arrow.svg';
 import leftPagin from '../../../../assets/left-pagin-arrow.svg';
 
-
-export default function Pagination() {
+export default function Pagination({ page, totalPages, onPrev, onNext, onSelect }) {
+    const pages = [...Array(totalPages).keys()].map((index) => index + 1);
     return (
         <div className="pagination">
-            <div className="button left">
-                <img src={leftPagin} alt="left arrow" />
+            <div
+                className={'button left' + (page === 1 ? ' disabled' : '')}
+                onClick={page === 1 ? undefined : onPrev}
+            >
+                <img src={leftPagin} alt="" />
             </div>
+
             <div className="pages">
-                <div className="page active">1</div>
-                <div className="page">2</div>
-                <div className="page">3</div>
+                {pages.map((pageNumber) => (
+                    <div
+                        key={pageNumber}
+                        className={'page' + (pageNumber === page ? ' active' : '')}
+                        onClick={() => onSelect?.(pageNumber)}
+                    >
+                        {pageNumber}
+                    </div>
+                ))}
             </div>
-            <div className="button right">
-                <img src={rightPagin} alt="right arrow" />
+
+            <div
+                className={'button right' + (page === totalPages ? ' disabled' : '')}
+                onClick={page === totalPages ? undefined : onNext}
+            >
+                <img src={rightPagin} alt="" />
             </div>
         </div>
-    )
+    );
 }

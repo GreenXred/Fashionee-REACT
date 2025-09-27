@@ -1,16 +1,17 @@
-import search from '../../../../assets/search.svg';
+import Search from '../../../../assets/search.svg';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function SearchBar({ defaultValue = '', onChange }) {
     const [value, setValue] = useState(defaultValue);
 
+    const onChangeRef = useRef(onChange);
+    useEffect(() => { onChangeRef.current = onChange; }, [onChange]);
+
     useEffect(() => {
-        const t = setTimeout(() => {
-            onChange?.(value.trim());
-        }, 300);
+        const t = setTimeout(() => onChangeRef.current?.(value.trim()), 300);
         return () => clearTimeout(t);
-    }, [value, onChange]);
+    }, [value]);
 
     return (
         <div className="search">
@@ -20,8 +21,10 @@ export default function SearchBar({ defaultValue = '', onChange }) {
                 placeholder="Search products"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                aria-label="Search products"
             />
+            <span className="search-icon">
+                <img src={Search} alt="" />
+            </span>
         </div>
     );
 }

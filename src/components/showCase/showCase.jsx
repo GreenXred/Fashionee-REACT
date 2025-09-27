@@ -21,9 +21,6 @@ export default function ShowCase({
     page = 1,      // текущая страница
     pageSize = 12, // количество товаров на странице
     onPageChange,
-    totalCount = products.length,
-    sort = 'RELEVANCE',
-    onChangeSort = () => { },
 }) {
 
     // ----- Храним состояния -----
@@ -51,15 +48,15 @@ export default function ShowCase({
     // категории из json
     const allCategories = useMemo(() => {
         const set = new Set();
-        products.forEach((p) => (p.categories || []).forEach((cat) => cat && set.add(String(cat))));
+        products.forEach((i) => (i.categories || []).forEach((cat) => cat && set.add(String(cat))));
         return ['All', ...Array.from(set)];
     }, [products]);
 
     // цвета из json 
     const allColors = useMemo(() => {
         const set = new Set();
-        products.forEach((p) => {
-            const raw = p.colors ?? p.color ?? [];
+        products.forEach((i) => {
+            const raw = i.colors ?? i.color ?? [];
             const arr = Array.isArray(raw) ? raw : [raw];
             arr.forEach((color) => {
                 const c = String(color || '').trim();
@@ -71,18 +68,18 @@ export default function ShowCase({
 
     //  мин/макс цен из json
     const [minPrice, maxPrice] = useMemo(() => {
-        const nums = products.map((p) => Number(p.price)).filter((n) => !Number.isNaN(n));
-        if (nums.length === 0) return [0, 0];
-        return [Math.min(...nums), Math.max(...nums)];
+        const cost = products.map((i) => Number(i.price)).filter((n) => !Number.isNaN(n));
+        if (cost.length === 0) return [0, 0];
+        return [Math.min(...cost), Math.max(...cost)];
     }, [products]);
 
     // ----- Фильтрация -----
 
     // 1) фильтрация по поиску (sideBar)
     const searched = useMemo(() => {
-        const q = query.trim().toLowerCase();
-        if (!q) return products;
-        return products.filter((p) => (p.name || '').toLowerCase().includes(q));
+        const normalized = query.trim().toLowerCase();
+        if (!normalized) return products;
+        return products.filter((i) => (i.name || '').toLowerCase().includes(normalized));
     }, [products, query]);
 
     // 2) фильтрация по примененной категории (activeCategory) / (sideBar)
@@ -95,8 +92,8 @@ export default function ShowCase({
     const byPrice = useMemo(() => {
         const min = Number(activePrice.min);
         const max = Number(activePrice.max);
-        return byCategory.filter((p) => {
-            const price = Number(p.price);
+        return byCategory.filter((i) => {
+            const price = Number(i.price);
             if (!Number.isNaN(min) && activePrice.min !== '' && price < min) return false;
             if (!Number.isNaN(max) && activePrice.max !== '' && price > max) return false;
             return true;
@@ -106,8 +103,8 @@ export default function ShowCase({
     // 4) фильтрация цветов (применённые) / (sideBar)
     const filtered = useMemo(() => {
         if (!activeColors.length) return byPrice;
-        return byPrice.filter((p) => {
-            const raw = p.colors ?? p.color ?? [];
+        return byPrice.filter((i) => {
+            const raw = i.colors ?? i.color ?? [];
             const colors = (Array.isArray(raw) ? raw : [raw]).map(c => String(c).toLowerCase());
             return activeColors.some(c => colors.includes(c));
         });
@@ -133,8 +130,8 @@ export default function ShowCase({
             <aside className="sidebar">
                 <SearchBar
                     defaultValue=""
-                    onChange={(q) => {
-                        setQuery(q);
+                    onChange={(i) => {
+                        setQuery(i);
                         onPageChange?.(1); // при новом поиске — на первую страницу
                     }}
                 />
@@ -176,20 +173,20 @@ export default function ShowCase({
                 </div>
 
                 <div className="products">
-                    {visible.map((p) => (
+                    {visible.map((product) => (
                         <ProductCard
-                            key={p.id}
-                            id={p.id}
-                            name={p.name}
-                            priceCurrent={p.price}
-                            priceOld={p.oldPrice}
-                            sale={p.isSale}
-                            isNew={p.isNew}
-                            image={p.image}
+                            key={product.id}
+                            id={product.id}
+                            name={product.name}
+                            priceCurrent={product.price}
+                            priceOld={product.oldPrice}
+                            sale={product.isSale}
+                            isNew={product.isNew}
+                            image={product.image}
                         />
                     ))}
                 </div>
-                
+
                 <Pagination
                     page={page}
                     totalPages={totalPages}

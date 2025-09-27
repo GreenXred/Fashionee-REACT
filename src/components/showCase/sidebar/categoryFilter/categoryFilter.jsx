@@ -8,10 +8,7 @@ export default function CategoryFilter({ value, onChange, options = [] }) {
             <li
               key={label}
               className={'item' + (value === label ? ' active' : '')}
-              role="button"
-              tabIndex={0}
               onClick={() => onChange?.(label)}
-              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onChange?.(label)}
             >
               {label}
             </li>

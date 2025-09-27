@@ -22,7 +22,6 @@ export default function ProductCard({ id, name, priceCurrent, priceOld, sale, is
             type="button"
             className={'favorits' + (isFav ? ' active' : '')}
             onClick={() => fav.toggleFavorite(id)}
-            aria-pressed={isFav ? 'true' : 'false'}
             title={isFav ? 'Remove from favorites' : 'Add to favorites'}
           >
             <img src={favorites} alt="favorite" />
@@ -42,9 +41,9 @@ export default function ProductCard({ id, name, priceCurrent, priceOld, sale, is
         </button>
       ) : (
         <div className="buy-panel">
-          <button className="qty-btn minus" onClick={() => cart.removeOne(id)} aria-label="Decrease">−</button>
-          <div className="qty" aria-live="polite">{qty}</div>
-          <button className="qty-btn plus" onClick={() => cart.addOne(id)} aria-label="Increase">+</button>
+          <button className="qty-btn minus" onClick={() => cart.removeOne(id)}>−</button>
+          <div className="qty">{qty}</div>
+          <button className="qty-btn plus" onClick={() => cart.addOne(id)}>+</button>
         </div>
       )}
     </div>
