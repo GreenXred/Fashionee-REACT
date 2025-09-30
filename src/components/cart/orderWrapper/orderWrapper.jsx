@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useCart } from "../../../state/cartContext";
 import data from "../../../../products.json"
 
-const DELIVERY_FEE = 16; // доставку фиксируем для примера                                      
+const DELIVERY_FEE = 15; // доставку фиксируем для примера                                      
 
 export default function OrderWrapper() {
     const cart = useCart();
@@ -30,10 +30,11 @@ export default function OrderWrapper() {
             .filter(Boolean);
     }, [cart.items, products]);
 
-    // ----- пересчёт итогов -----
+    // ----- перерасчет итогов -----
     const orderPrice = items.reduce((sum, item) => sum + item.lineTotal, 0);
     const delivery = items.length ? DELIVERY_FEE : 0;
-    const total = orderPrice + delivery;
+    const discount = cart.isPromoValid ? orderPrice * 0.10 : 0;     //  10% по промо 'ilovereact'
+    const total = (orderPrice - discount) + delivery;               //  учитываем скидку из промо
 
     // ----- когда пустая корзина -----
     if (items.length === 0) {
@@ -97,9 +98,12 @@ export default function OrderWrapper() {
                         <div className="name">Order price</div>
                         <div>${orderPrice.toFixed(2)}</div>
                     </div>
+                    {/* скидка по промокоду */}
                     <div className="price-row">
                         <div className="name">Discount for promo code</div>
-                        <div className="no-price">No</div>
+                        <div className={discount ? 'price minus' : 'no-price'}>
+                            {discount ? `- $${discount.toFixed(2)}` : 'No'}
+                        </div>
                     </div>
                     <div className="price-row delimiter">
                         <div className="name">Delivery</div>

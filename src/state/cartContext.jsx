@@ -2,9 +2,11 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 const CartContext = createContext(null);
 const LS_KEY = 'cart';
+const PROMO_KEY = 'promo';
 
 export function CartProvider({ children }) {
     const [cart, setCart] = useState(() => {
+
         try {
             const raw = localStorage.getItem(LS_KEY);
             const obj = raw ? JSON.parse(raw) : {};
@@ -18,14 +20,26 @@ export function CartProvider({ children }) {
         }
     });
 
+    // ----- состояния промокода ----- //
+    const [promo, setPromo] = useState(() => localStorage.getItem(PROMO_KEY) || '');
+    const isPromoValid = promo.trim().toLowerCase() === 'ilovereact';
+
+    // ----- сохраняем промокод при изменении ----- //
+    useEffect(() => {
+        localStorage.setItem(PROMO_KEY, promo);
+    }, [promo]);
+
+    // ----- сохраняем корзину при изменении ----- //
     useEffect(() => {
         const obj = Object.fromEntries(cart.entries());
         localStorage.setItem(LS_KEY, JSON.stringify(obj));
     }, [cart]);
 
+    // ----- операции с корзиной ----- //
     const api = useMemo(() => {
         const totalCount = Array.from(cart.values()).reduce((s, n) => s + n, 0);
 
+        // ----- добавление товара в корзину ----- //
         function addOne(id) {
             setCart(prev => {
                 const next = new Map(prev);
@@ -35,6 +49,7 @@ export function CartProvider({ children }) {
             });
         }
 
+        // ----- удаление товара из корзины ----- //
         function removeOne(id) {
             setCart(prev => {
                 const next = new Map(prev);
@@ -46,6 +61,7 @@ export function CartProvider({ children }) {
             });
         }
 
+        // ----- изменение количества товара в корзине ----- //
         function setQty(id, qty) {
             setCart(prev => {
                 const next = new Map(prev);
@@ -63,9 +79,12 @@ export function CartProvider({ children }) {
             removeOne,
             setQty,
             clear: () => setCart(new Map()),
-            items: Array.from(cart.entries()).map(([id, qty]) => ({ id, qty }))
+            items: Array.from(cart.entries()).map(([id, qty]) => ({ id, qty })), // список позиций    
+            promo,
+            setPromo,
+            isPromoValid,
         };
-    }, [cart]);
+    }, [cart, promo, isPromoValid]);
 
     return <CartContext.Provider value={api}>{children}</CartContext.Provider>;
 }

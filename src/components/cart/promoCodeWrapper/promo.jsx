@@ -1,6 +1,23 @@
+import { useState } from "react";
+import { useCart } from "../../../state/cartContext";
+
 import buttonArrow from "../../../assets/button-arrow.svg";
 
+
+
 export default function Promo() {
+
+    // ----- текущее значение промокода и сеттер из контекста ----- //
+    const { promo, setPromo } = useCart();
+    // ----- локальное состояние поля (начало из контекста) ----- //
+    const [value, setValue] = useState(promo);
+    // ----- обработчик сабмита формы ----- // 
+    const apply = (e) => {
+        e?.preventDefault?.();
+        setPromo(value);
+    };
+
+
     return (
         <div className="promo-code-wrapper">
             <div className="info">
@@ -9,15 +26,22 @@ export default function Promo() {
                     To receive up-to-date promotional codes, subscribe to us on social networks.
                 </div>
             </div>
-            <div className="promo-code">
-                <input type="text" name="promo-code" className="input" placeholder="Enter Promo Code" />
+            <form className="promo-code" onSubmit={apply}>
+                <input
+                    type="text"
+                    name="promo-code"
+                    className="input"
+                    placeholder="Enter Promo Code"
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                />
                 <div className="button-wrapper">
-                    <button className="button">
+                    <button type="submit" className="button">
                         <img src={buttonArrow} alt="Arrow icon" />
                     </button>
                     <div className="vertical-line"></div>
                 </div>
-            </div>
+            </form>
             <div className="find-us">
                 <div className="find-us-text">Find us here:</div>
                 <div className="find-us-links">
