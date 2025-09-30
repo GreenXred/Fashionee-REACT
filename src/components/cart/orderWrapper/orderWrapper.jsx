@@ -8,7 +8,7 @@ export default function OrderWrapper() {
     const cart = useCart();
     const products = data.products || [];
 
-    // ----- позиции корзины с данными товара -----
+    // ----- позиции корзины с данными товара ----- //
     const items = useMemo(() => { // 
         return cart.items
             .map(({ id, qty }) => {
@@ -30,13 +30,31 @@ export default function OrderWrapper() {
             .filter(Boolean);
     }, [cart.items, products]);
 
-    // ----- перерасчет итогов -----
+    // ----- перерасчет итогов ----- //
     const orderPrice = items.reduce((sum, item) => sum + item.lineTotal, 0);
     const delivery = items.length ? DELIVERY_FEE : 0;
-    const discount = cart.isPromoValid ? orderPrice * 0.10 : 0;     //  10% по промо 'ilovereact'
-    const total = (orderPrice - discount) + delivery;               //  учитываем скидку из промо
+    const discount = cart.isPromoValid ? orderPrice * 0.10 : 0; //  10% по промо 'ilovereact'
+    const total = (orderPrice - discount) + delivery; //  учитываем скидку из промо
 
-    // ----- когда пустая корзина -----
+    // -----  данные заказа и для вывода в консоль ----- //
+    const handleCheckout = () => {
+        const order = {
+            promo: cart.promo,
+            isPromoValid: cart.isPromoValid,
+            items: items.map(({ id, name, price, qty, lineTotal }) => ({
+                id, name, price, qty, lineTotal
+            })),
+            summary: {
+                orderPrice, // сумма товаров (без доставки/скидки)
+                discount,  // скидка по промокоду
+                delivery, // доставка
+                total    // итог к оплате
+            },
+        };
+        console.log('Checkout order:', order);
+    };
+
+    // ----- когда пустая корзина ----- //
     if (items.length === 0) {
         return (
             <div className="order-wrapper">
@@ -55,7 +73,7 @@ export default function OrderWrapper() {
         );
     }
 
-    // -----  корзина  -----
+    // -----  корзина  ----- //
     return (
         <div className="order-wrapper">
             <div className="product-list">
@@ -114,7 +132,7 @@ export default function OrderWrapper() {
                         <div className="price">${total.toFixed(2)}</div>
                     </div>
                     <div className="button-wrapper">
-                        <button className="button">Checkout</button>
+                        <button className="button" onClick={handleCheckout}>Checkout</button>
                         <div className="vertical-line"></div>
                     </div>
                 </div>
