@@ -63,6 +63,7 @@ export function CartProvider({ children }) {
             removeOne,
             setQty,
             clear: () => setCart(new Map()),
+            items: Array.from(cart.entries()).map(([id, qty]) => ({ id, qty }))
         };
     }, [cart]);
 
