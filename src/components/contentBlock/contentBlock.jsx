@@ -1,4 +1,4 @@
-import './contentBlock.css';
+import './contentBlock.scss';
 
 import bigDotsField from '../../assets/big-dots-field.svg';
 

@@ -1,4 +1,4 @@
-import './cartPage.css';
+import './cartPage.scss';
 
 // шапка и верхний нав-блок
 import Header from '../../components/header/header.jsx';

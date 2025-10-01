@@ -1,4 +1,4 @@
-import "./header.css";
+import "./header.scss";
 import { useFavorites } from '../../state/favoritesContext.jsx';
 import { useCart } from '../../state/cartContext.jsx';
 

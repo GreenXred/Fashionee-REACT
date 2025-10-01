@@ -1,7 +1,7 @@
 import rightPagin from '../../../../assets/right-pagin-arrow.svg';
 import leftPagin from '../../../../assets/left-pagin-arrow.svg';
 
-import './pagination.css';
+import './pagination.scss';
 
 export default function Pagination({ page, totalPages, onPrev, onNext, onSelect }) {
     const pages = [...Array(totalPages).keys()].map((index) => index + 1);

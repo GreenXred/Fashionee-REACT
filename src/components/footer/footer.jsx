@@ -1,4 +1,4 @@
-import "./footer.css"
+import "./footer.scss"
 
 import logo from '../../assets/logo.svg';
 import send from '../../assets/send.svg';
