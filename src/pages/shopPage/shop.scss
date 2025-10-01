@@ -36,7 +36,7 @@
                 font-size: 24px;
                 font-weight: 400;
                 line-height: 29px;
-                border-bottom: 2px solid rgba(0, 0, 0, 1);
+                border-bottom: 2px solid $black;
                 padding-bottom: 15px;
                 text-align: left;
             }
@@ -83,7 +83,7 @@
                                 height: 15px;
                                 flex-shrink: 0;
                                 flex-grow: 0;
-                                border: 1px solid rgba(238, 238, 238, 1);
+                                border: 1px solid $border;
                                 margin-right: 15px;
                                 background-repeat: no-repeat;
                                 background-position: center center;
@@ -92,7 +92,7 @@
                         }
 
                         .color-checkbox:checked+.color-name {
-                            color: rgba(255, 142, 142, 1);
+                            color: $brand;
 
                             &::before {
                                 background-image: url("../icons/check-pink.svg");
@@ -113,7 +113,7 @@
                         .image {
                             width: 75px;
                             height: 85px;
-                            background: rgba(241, 242, 243, 1)
+                            background: $bg-soft;
                         }
                     }
 
@@ -127,7 +127,7 @@
                             font-size: 14px;
                             font-weight: 400;
                             line-height: 20px;
-                            color: rgba(68, 68, 68, 1);
+                            color: $main-text;
                         }
 
                         .price {
@@ -174,7 +174,7 @@
 
                 .photo {
                     height: 360px;
-                    background: #F1F2F3;
+                    background: $bg-soft;
                     position: relative;
 
                     .photo-img {
@@ -216,14 +216,14 @@
                                 font-size: 10px;
                                 font-weight: 800;
                                 line-height: 10px;
-                                color: rgb(255, 255, 255, 1);
+                                color: $white-text;
                                 text-transform: uppercase;
                                 padding: 5px 10px;
-                                background: rgba(255, 142, 142, 1);
+                                background: $brand;
                             }
 
                             .label.new {
-                                background: rgba(149, 204, 181, 1);
+                                background: $new-banner;
                             }
                         }
                     }
@@ -249,7 +249,7 @@
                     .qty-btn {
                         width: 35px;
                         height: 35px;
-                        border: 1px solid #000;
+                        border: 1px solid $black;
                         background: transparent;
                         cursor: pointer;
                         font-size: 20px;
@@ -297,7 +297,7 @@
                 width: 100%;
 
                 .input {
-                    color: rgba(0, 0, 0, 1);
+                    color: $black;
                 }
             }
         }

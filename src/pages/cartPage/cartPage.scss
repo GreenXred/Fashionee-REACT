@@ -18,7 +18,7 @@
             display: flex;
             gap: 50px;
             flex-direction: column;
-            border-bottom: 2px solid rgba(0, 0, 0, 1);
+            border-bottom: 2px solid $black;
             padding-bottom: 10px;
 
             .product {
@@ -27,13 +27,13 @@
                 gap: 30px;
                 align-items: center;
                 padding: 0 0 30px 0;
-                border-bottom: 1px solid rgba(68, 68, 68, 10%);
+                border-bottom: 1px solid $grey, .1;
 
                 .photo {
                     max-width: 130px;
                     width: 100%;
                     height: 140px;
-                    background: rgb(241, 242, 243, 1);
+                    background: $bg-soft;
                     overflow: hidden;
                     border-radius: 4px;
 
@@ -58,7 +58,7 @@
                     font-size: 20px;
                     font-weight: 400;
                     line-height: 24px;
-                    color: rgb(0, 0, 0, 1);
+                    color: $black-text;
                 }
 
                 .price-wrapper {
@@ -73,7 +73,7 @@
                         gap: 48px;
 
                         .quantity {
-                            background: rgb(248, 248, 251, 1);
+                            background: rgb(248, 248, 251);
                             display: flex;
                             gap: 20px;
                             padding: 17px 23px;
@@ -108,8 +108,8 @@
                     top: 0;
                     right: 0;
                     padding: 3px 7px;
-                    border: 1px solid rgba(68, 68, 68, 10%);
-                    color: rgba(68, 68, 68, 10%);
+                    border: 1px solid $grey, .1;
+                    color: $main-text, .1;
                     cursor: pointer;
                 }
             }
@@ -122,14 +122,14 @@
             max-width: 360px;
             width: 100%;
             padding: 40px;
-            border: 1px solid rgba(68, 68, 68, 0.1);
+            border: 1px solid $grey, .1;
 
             .title {
                 font-family: Josefin Sans;
                 font-size: 32px;
                 font-size: 400;
                 line-height: 38px;
-                color: rgb(0, 0, 0, 1);
+                color: $black;
             }
 
             .order-price-wrapper {
@@ -144,12 +144,12 @@
                     font-size: 16px;
                     font-weight: 400;
                     line-height: 27px;
-                    color: rgba(68, 68, 68, 1);
+                    color: $main-text;
                     padding-bottom: 15px;
-                    border-bottom: 1px solid rgba(68, 68, 68, 10%);
+                    border-bottom: 1px solid $grey, .1;
 
                     &.delimiter {
-                        border-bottom: 2px solid rgba(0, 0, 0, 1);
+                        border-bottom: 2px solid $black;
                     }
 
                     &.total {
@@ -168,7 +168,7 @@
                         font-size: 20px;
                         font-weight: 400;
                         line-height: 20px;
-                        color: rgba(68, 68, 68, 1);
+                        color: $main-text;
                     }
                 }
             }
@@ -197,13 +197,13 @@
                 font-size: 32px;
                 font-weight: 400;
                 line-height: 38px;
-                color: rgba(0, 0, 0, 1);
+                color: $black-text;
 
                 .description {
                     font-size: 16px;
                     font-weight: 400;
                     line-height: 27px;
-                    color: rgba(68, 68, 68, 1);
+                    color: $main-text;
                 }
             }
         }
