@@ -1,15 +1,47 @@
 @use '../../../../styles/variables' as *;
 
-.arrow {
-    cursor: pointer;
-    transition: transform .12s ease;
-    will-change: transform;
-}
+.pagination {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 30px;
+    align-items: center;
 
-.arrow:hover {
-    transform: scale(1.1);
-}
+    .arrow {
+        cursor: pointer;
+        transition: transform .12s ease;
+        will-change: transform;
 
-.page {
-    cursor: pointer;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    .pages {
+        display: flex;
+        gap: 20px;
+
+        .page {
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 16px;
+            border-bottom: 3px solid rgba(0, 0, 0, 1);
+            height: 25px;
+            opacity: 0.5;
+            width: 10px;
+            text-align: center;
+
+            &.active {
+                opacity: 1;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 16px;
+                width: 22px;
+                text-align: center;
+                width: 22px;
+            }
+        }
+    }
+
 }
