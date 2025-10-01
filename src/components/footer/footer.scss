@@ -1,108 +1,67 @@
 @use '../../styles/variables' as *;
 
 .footer {
-    border-top: 20px solid rgba(238, 238, 238, 1);
+    border-top: 20px solid rgba($border, 1);
     margin-top: 120px;
     position: relative;
 
     .footer-info {
-        margin: 110px 0 90px 0;
+        margin: 110px 0 90px;
         display: flex;
 
         .column {
-
-            .column-1 {
-                max-width: 331px;
-                margin: 0 60px 0 0;
+            .title {
+                font-family: 'Josefin Sans';
+                font-size: 20px;
+                font-weight: 400;
+                line-height: 24px;
             }
 
-            .column-2 {
-                margin: 0 108px 0 0;
+            &.column-1 {
+                max-width: 331px;
+                margin-right: 60px;
+
+                .logo {
+                    margin-bottom: 25px;
+                }
+
+                .about-brand {
+                    padding-bottom: 25px;
+                    border-bottom: 1px solid rgba($grey, .2);
+                    margin-bottom: 35px;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 24px;
+                    color: rgba($main-text, 1);
+                }
+            }
+
+            &.column-2,
+            &.column-3 {
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
-
-                .title {
-                    font-family: Josefin Sans;
-                    font-size: 20px;
-                    font-weight: 400;
-                    line-height: 24px;
-                }
-
-                .custom-list {
-
-                    .item {
-                        gap: 12px;
-
-                        &::before {
-                            width: 3px;
-                            height: 3px;
-                        }
-
-                        a {
-                            text-decoration: none;
-                            font-family: Raleway;
-                            font-weight: 400;
-                            font-size: 14px;
-                            line-height: 24px;
-                            text-align: left;
-                            color: #444444;
-                        }
-                    }
-                }
             }
 
-            .column-3 {
-                margin: 0 74px 0 0;
+            &.column-2 {
+                margin-right: 108px;
+            }
+
+            &.column-3 {
+                margin-right: 74px;
                 max-width: 119px;
                 width: 100%;
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-
-                .title {
-                    font-family: Josefin Sans;
-                    font-size: 20px;
-                    font-weight: 400;
-                    line-height: 24px;
-                }
-
-                .custom-list {
-
-                    .item {
-                        gap: 12px;
-
-                        &::before {
-                            width: 3px;
-                            height: 3px;
-                        }
-
-                        a {
-                            text-decoration: none;
-                            font-family: Raleway;
-                            font-weight: 400;
-                            font-size: 14px;
-                            line-height: 24px;
-                            text-align: left;
-                            color: #444444;
-                        }
-                    }
-                }
             }
 
-            .column-4 {
+            &.column-4 {
                 max-width: 361px;
 
                 .title {
-                    font-family: Josefin Sans;
-                    font-size: 20px;
-                    font-weight: 400;
-                    line-height: 24px;
-                    margin: 0 0 16px 0;
+                    margin-bottom: 16px;
                 }
 
                 .newsletter-text {
-                    margin: 0 0 16px 0;
+                    margin-bottom: 16px;
                     font-weight: 400;
                     font-size: 14px;
                     line-height: 24px;
@@ -112,7 +71,7 @@
                     position: relative;
 
                     .input {
-                        padding: 0 48px 0 0;
+                        padding-right: 48px;
                     }
 
                     .send {
@@ -123,78 +82,77 @@
                         display: flex;
                         align-items: center;
                         cursor: pointer;
-
-                        img {
-                            width: 24px;
-                            height: 24px;
-                            display: block;
-                        }
                     }
                 }
             }
 
-            .logo {
-                margin: 0 0 25px 0;
-            }
+            .custom-list {
+                list-style: none;
+                margin: 0;
+                padding: 0;
 
-            .about-brand {
-                padding: 0 0 25px 0;
-                border-bottom: 1px solid rgba(68, 68, 68, 20%);
-                margin: 0 0 35px 0;
-                font-size: 14px;
-                font-weight: 400;
-                line-height: 24px;
-                color: rgb(68, 68, 68, 1);
-            }
-        }
-    }
+                .item {
+                    position: relative;
+                    padding-left: 18px;
+                    margin: 0 0 12px;
 
-    .copyright {
-        display: flex;
-        justify-content: space-between;
-        gap: 15px;
-        border-top: 1px solid rgba(68, 68, 68, 20%);
-        padding-top: 23px;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 24px;
-        color: rgb(68, 68, 68, 1);
 
-        .payment-methods-container {
-            display: flex;
-            gap: 13px;
-            align-items: center;
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 24px;
-            color: rgb(68, 68, 68, 1);
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        top: 0.85em;
+                        width: 4px;
+                        height: 4px;
+                        background: $black;
+                        border-radius: 50%;
+                        transform: translateY(-50%);
+                    }
+                }
 
-            .payment-methods {
-                display: flex;
-                gap: 8px;
+                a {
+                    text-decoration: none;
+                    color: $main-text;
+                    font: 400 14px/24px Raleway, sans-serif;
+                }
             }
         }
-    }
-    .big-dots-background {
-        position: absolute;
-        top: -60px;
-        left: 1300px;
-        transform: translate(50%, 50%);
-    }
-    .small-dots-background {
-       position: absolute;
-       top: 0;
-       left: 0;
-       transform: translate(25%, 30%);
     }
 }
 
+.copyright {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    border-top: 1px solid rgba($grey, .2);
+    padding-top: 23px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    color: rgba($main-text, 1);
 
+    .payment-methods-container {
+        display: flex;
+        gap: 13px;
+        align-items: center;
 
+        .payment-methods {
+            display: flex;
+            gap: 8px;
+        }
+    }
+}
 
+.big-dots-background {
+    position: absolute;
+    top: -60px;
+    left: 1300px;
+    transform: translate(50%, 50%);
+}
 
-
-
-
-
-
+.small-dots-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(25%, 30%);
+}
