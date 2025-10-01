@@ -1,3 +1,5 @@
+@use '../../../../styles/variables' as *;
+
 .arrow {
     cursor: pointer;
     transition: transform .12s ease;

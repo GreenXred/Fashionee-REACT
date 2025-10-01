@@ -1,80 +1,84 @@
-.nav .container {
-    gap: 150px;
-    max-width: 1800px;
-    position: relative;
-}
+@use '../../styles/variables' as *;
 
-.nav .page-description {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 50px;
-    gap: 150px;
-    position: relative;
-    z-index: 2;
-}
+.nav {
+    .container {
+        gap: 150px;
+        max-width: 1800px;
+        position: relative;
 
-.nav .page-description .description {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 850px;
-    width: 100%;
-    justify-content: center;
-}
+        .page-description {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 50px;
+            gap: 150px;
+            position: relative;
+            z-index: 2;
 
-.nav .page-description .description .border-line {
-    width: 100%;
-    height: 2px;
-    background-color: rgba(0, 0, 0, 1);
-}
+            .description {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                max-width: 850px;
+                width: 100%;
+                justify-content: center;
 
-.nav .page-description .description .description-title {
-    font-family: Josefin Sans;
-    font-weight: 400;
-    font-size: 80px;
-    line-height: 1.2;
-    margin-left: 358px;
-}
+                .description-title {
+                    font-family: Josefin Sans;
+                    font-weight: 400;
+                    font-size: 80px;
+                    line-height: 1.2;
+                    margin-left: 358px;
+                }
 
-.nav .page-description .description .mini-nav {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    padding-left: 358px;
-    z-index: 10;
-}
+                .mini-nav {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 12px;
+                    padding-left: 358px;
+                    z-index: 10;
 
-.nav .page-description .description .mini-nav .mini-nav-item {
-    font-weight: 500;
-    font-size: 14px;
-    cursor: pointer;
-}
+                    .mini-nav-item {
+                        font-weight: 500;
+                        font-size: 14px;
+                        cursor: pointer;
 
-.nav .page-description .description .mini-nav .mini-nav-item.active {
-    color: #FF8E8E;
-}
+                        &.active {
+                            color: $brand;
+                        }
+                    }
 
-.nav .page-description .description .mini-nav .vertical-line {
-    width: 1.5px;
-    height: 14px;
-    background-color: #333;
-    margin: 0 5px;
-}
+                    .vertical-line {
+                        width: 1.5px;
+                        height: 14px;
+                        background-color: $grey;
+                        margin: 0 5px;
+                    }
+                }
 
-.nav .dots-background {
-    position: absolute;
-    width: 322px;
-    height: 357px;
-    top: 52%;
-    left: 20%;
-    transform: translate(-77%, -36%);
-    z-index: 1;
-}
+                .border-line {
+                    width: 100%;
+                    height: 2px;
+                    background-color: $black;
+                }
+            }
 
-.nav .page-description .top-banner {
-    max-width: 800px;
-    width: 100%;
-    height: 400px;
-    background: #F1F2F3;
-    margin: 0 120px 0 0;
+            .dots-background {
+                position: absolute;
+                width: 322px;
+                height: 357px;
+                top: 52%;
+                left: 20%;
+                transform: translate(-77%, -36%);
+                z-index: 1;
+            }
+
+            .top-banner {
+                max-width: 800px;
+                width: 100%;
+                height: 400px;
+                background: $bg-soft;
+                margin: 0 120px 0 0;
+            }
+        }
+    }
 }
