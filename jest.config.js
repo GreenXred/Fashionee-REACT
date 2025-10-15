@@ -4,7 +4,7 @@ export default {
     moduleNameMapper: {
         // глушим стили и ассеты, чтобы Jest не падал на импорт
         "\\.(css|scss)$": "identity-obj-proxy",
-        "\\.(svg|png|jpg|jpeg|gif)$": "<rootDir>/test/__mocks__/fileMock.js"
+        "\\.(svg|png|jpg|jpeg|gif)$": "<rootDir>/test/mocks/fileMock.js"
     },
     setupFilesAfterEnv: ["@testing-library/jest-dom"]
 };
