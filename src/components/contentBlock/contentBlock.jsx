@@ -17,11 +17,13 @@ export default function ContentBlock({ page, onGoShop, onGoCart }) {
                             <div className="vertical-line"></div>
                             <div className={'mini-nav-item' + (isShop ? ' active' : '')}
                                 onClick={onGoShop}
+                                data-testid="tab-shop"
                             >
                                 <span>Shop</span>
                             </div>
                             <div className={'mini-nav-item' + (isShop ? '' : ' active')}
                                 onClick={onGoCart}
+                                data-testid="tab-cart"
                             >
                                 <span>Cart</span>
                             </div>

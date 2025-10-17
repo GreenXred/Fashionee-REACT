@@ -60,10 +60,11 @@ export default function Header({ onGoCart }) {
                     <div className="counter">{count}</div>
                 </div>
                 <div className="header-icon"
+                    data-testid="header-cart" 
                     onClick={() => onGoCart?.()}
                 >
                     <img src={cart} alt="cart" />
-                    <div className="counter">{totalCount}</div>
+                    <div data-testid="header-counter" className="counter">{totalCount}</div>
                 </div>
             </div>
         </header >

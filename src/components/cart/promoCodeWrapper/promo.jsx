@@ -31,12 +31,13 @@ export default function Promo() {
                     type="text"
                     name="promo-code"
                     className="input"
+                    data-testid="promo-input"
                     placeholder="Enter Promo Code"
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                 />
                 <div className="button-wrapper">
-                    <button type="submit" className="button">
+                    <button type="submit" className="button" data-testid="promo-apply" aria-label="Apply">
                         <img src={buttonArrow} alt="Arrow icon" />
                     </button>
                     <div className="vertical-line"></div>

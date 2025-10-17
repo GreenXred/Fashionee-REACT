@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useCart } from "../../../state/cartContext";
 import data from "../../../../products.json"
 
-const DELIVERY_FEE = 15; // доставку фиксируем для примера                                      
+const DELIVERY_FEE = 16; // доставку фиксируем для примера                                      
 
 export default function OrderWrapper() {
     const cart = useCart();
@@ -129,7 +129,7 @@ export default function OrderWrapper() {
                     </div>
                     <div className="price-row total">
                         <div className="name">Total</div>
-                        <div className="price">${total.toFixed(2)}</div>
+                        <div data-testid="sum-total" className="price">${total.toFixed(2)}</div>
                     </div>
                     <div className="button-wrapper">
                         <button className="button" onClick={handleCheckout}>Checkout</button>

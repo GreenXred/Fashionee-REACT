@@ -17,6 +17,7 @@ export default function SearchBar({ defaultValue = '', onChange }) {
         <div className="search">
             <input
                 className="input"
+                data-testid="search-input" // для тестов
                 type="text"
                 placeholder="Search products"
                 value={value}
