@@ -1,0 +1,26 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Red Hat",
+            "price": 100,
+            "oldPrice": 120,
+            "image": "",
+            "category": "Accessories",
+            "colors": [
+                "Red"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Blue Shoes",
+            "price": 50,
+            "oldPrice": null,
+            "image": "",
+            "category": "Shoes",
+            "colors": [
+                "Blue"
+            ]
+        }
+    ]
+}
